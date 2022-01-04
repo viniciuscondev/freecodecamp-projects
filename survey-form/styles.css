@@ -1,0 +1,101 @@
+*, *:after, *:before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body {
+    position: relative;
+    background-color: #003b29;
+    color: white;
+    font-size: 1.5em;
+    font-family: 'Roboto', sans-serif;
+}
+
+body:before {
+    content: ' ';
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.3;
+    background-image: url('https://pixabay.com/get/g74f0bf22ca0301eb0eaf603cc95275dc2b1749abc3823e42f338e4ed04e5e12bef8860f8ff92d5747d2faabed8c9c15c.jpg');
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    background-size: cover;
+}
+
+main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#title {
+    margin: 1rem 0;
+}
+
+#description {
+    margin-bottom: 2rem;
+}
+
+#survey-form {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 30px 50px;
+    width: 700px;
+    border-radius: 7px;
+}
+
+#survey-form input, select {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border-radius: 7px;
+    color: rgb(94, 94, 94);
+    margin: 10px 0 20px 0;    
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+.form-container p {
+    margin-bottom: 14px;
+}
+
+textarea {    
+    font-family: 'Roboto', sans-serif;
+    padding: 8px 12px;
+    font-size: 1rem;
+    border-radius: 7px;
+    color: rgb(94, 94, 94);
+    margin: 10px 0 20px 0;
+}
+
+button {
+    font-family: 'Roboto', sans-serif;
+    padding: 12px 12px;
+    font-size: 1rem;
+    border-radius: 7px;
+    border: none;
+    background-color: rgb(113, 38, 184);
+    color: white;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+@media (max-width: 700px) {
+    #survey-form {
+        width: 100%;
+        padding: 20px;
+    }
+}
