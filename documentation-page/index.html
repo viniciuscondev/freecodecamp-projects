@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Documentation Page</title>
+</head>
+<body>    
+    <nav id="navbar">
+        <header>
+            <h1>Styled Components</h1>
+        </header>
+        <a href="#Motivation" class="nav-link">Motivation</a>
+        <a href="#Installation" class="nav-link">Installation</a>
+        <a href="#Getting_Started" class="nav-link">Getting Started</a>
+        <a href="#Adapting_based_on_props" class="nav-link">Adapting based on props</a>
+        <a href="#Extending_Styles" class="nav-link">Extending Styles</a>
+    </nav>
+
+    <main id="main-doc">
+        <h2>Basics</h2>
+        <section class="main-section" id="Motivation">
+            <header>
+                <h3>Motivation</h3>
+            </header>
+            <p>styled-components is the result of wondering how we could enhance CSS for styling React component systems. By focusing on a single use case we managed to optimize the experience for developers as well as the output for end users.</p>
+            <p>Apart from the improved experience for developers, styled-components provides:</p>
+            <ul>
+                <li>Automatic critical CSS: styled-components keeps track of which components are rendered on a page and injects their styles and nothing else, fully automatically. Combined with code splitting, this means your users load the least amount of code necessary.</li>            
+                <li>No class name bugs: styled-components generates unique class names for your styles. You never have to worry about duplication, overlap or misspellings.</li>            
+                <li>Easier deletion of CSS: it can be hard to know whether a class name is used somewhere in your codebase. styled-components makes it obvious, as every bit of styling is tied to a specific component. If the component is unused (which tooling can detect) and gets deleted, all its styles get deleted with it.</li>            
+                <li>Simple dynamic styling: adapting the styling of a component based on its props or a global theme is simple and intuitive without having to manually manage dozens of classes.</li>            
+                <li>Painless maintenance: you never have to hunt across different files to find the styling affecting your component, so maintenance is a piece of cake no matter how big your codebase is.</li>            
+                <li>Automatic vendor prefixing: write your CSS to the current standard and let styled-components handle the rest.</li>          
+            </ul>
+            <p>You get all of these benefits while still writing the CSS you know and love, just bound to individual components.</p>  
+        </section>
+        <section class="main-section" id="Installation">
+            <header>
+                <h3>Installation</h3>
+            </header>
+            <p>Installing styled-components only takes a single command and you're ready to roll:</p>
+            <code>
+        # with npm
+        npm install --save styled-components
+        
+        # with yarn
+        yarn add styled-components
+            </code>
+            <p>If you use a package manager like yarn that supports the "resolutions" package.json field, we also highly recommend you add an entry to it as well corresponding to the major version range. This helps avoid an entire class of problems that arise from multiple versions of styled-components being installed in your project.</p>
+            <p>In package.json:</p>
+            <code>
+        {
+            "resolutions": {
+                "styled-components": "^5"
+            }
+        }
+            </code>
+        </section>
+        <section class="main-section" id="Getting_Started">
+            <header>
+                <h3>Getting Started</h3>
+            </header>
+            <p>styled-components utilises tagged template literals to style your components.</p>
+            <p>It removes the mapping between components and styles. This means that when you're defining your styles, you're actually creating a normal React component, that has your styles attached to it.</p>
+            <p>This example creates two simple components, a wrapper and a title, with some styles attached to it:</p>
+            <code>
+        // Create a Title component that'll render an &lt;h1&gt; tag with some styles
+            const Title = styled.h1`
+                font-size: 1.5em;
+                text-align: center;
+                color: palevioletred;
+            `;
+            
+            // Create a Wrapper component that'll render a &lt;section&gt; tag with some styles
+            const Wrapper = styled.section`
+                padding: 4em;
+                background: papayawhip;
+            `;
+            
+            // Use Title and Wrapper like any other React component – except they're styled!
+            render(
+                &lt;Wrapper&gt;
+                &lt;Title&gt;
+                    Hello World!
+                &lt;/Title&gt;
+                &lt;/Wrapper&gt;
+            );
+            </code>
+        </section>
+        <section class="main-section" id="Adapting_based_on_props">
+            <header>
+                <h3>Adapting based on props</h3>
+            </header>
+            <p>You can pass a function ("interpolations") to a styled component's template literal to adapt it based on its props.</p>
+            <p>This button component has a primary state that changes its color. When setting the primary prop to true, we are swapping out its background and text color.</p>
+            <code>
+        const Button = styled.button`
+            /* Adapt the colors based on primary prop */
+            background: ${props => props.primary ? "palevioletred" : "white"};
+            color: ${props => props.primary ? "white" : "palevioletred"};
+
+        font-size: 1em;
+        margin: 1em;
+        padding: 0.25em 1em;
+        border: 2px solid palevioletred;
+        border-radius: 3px;
+        `;
+
+        render(
+        &lt;div&gt;
+            &lt;Button>Normal&lt;/Button&gt;
+            &lt;Button primary>Primary&lt;/Button&gt;
+        &lt;/div&gt;
+        );
+            </code>
+        </section>
+        <section class="main-section" id="Extending_Styles">
+            <header>
+                <h3>Extending Styles</h3>
+            </header>
+            <p>Quite frequently you might want to use a component, but change it slightly for a single case. Now, you could pass in an interpolated function and change them based on some props, but that's quite a lot of effort for overriding the styles once.</p>
+            <p>To easily make a new component that inherits the styling of another, just wrap it in the styled() constructor. Here we use the button from the last section and create a special one, extending it with some color-related styling:</p>
+            <code>
+        // The Button from the last section without the interpolations
+        const Button = styled.button`
+        color: palevioletred;
+        font-size: 1em;
+        margin: 1em;
+        padding: 0.25em 1em;
+        border: 2px solid palevioletred;
+        border-radius: 3px;
+        `;
+
+        // A new component based on Button, but with some override styles
+        const TomatoButton = styled(Button)`
+        color: tomato;
+        border-color: tomato;
+        `;
+
+        render(
+        &lt;div&gt;
+            &lt;Button&gt;Normal Button&lt;/Button&gt;
+            &lt;TomatoButton&gt;Tomato Button&lt;/TomatoButton&gt;
+        &lt;/div&gt;
+        );
+            </code>
+        </section>
+    </main>
+    
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</body>
+</html>
